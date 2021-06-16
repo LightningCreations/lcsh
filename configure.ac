@@ -1,0 +1,31 @@
+AC_INIT
+
+AC_CONFIG_MACRO_DIRS([m4/])
+
+AC_CANONICAL_BUILD
+AC_CANONICAL_HOST
+
+
+AC_PROG_CC
+AC_PROG_INSTALL
+
+LCRUST_PROG_RUSTC
+LCRUST_RUSTC_VERSION
+
+
+AC_MSG_CHECKING([whether $RUSTC accepts --edition 2018])
+LCRUST_CHECK_EDITION(2018)
+
+if test x$rust_edition != xno
+then
+    AC_MSG_RESULT([yes])
+else
+    AC_MSG_RESULT([no])
+    AC_MSG_ERROR([Cannot compile rust 2018 project with $RUSTC])
+fi
+
+
+AC_CONFIG_FILES([Makefile])
+
+AC_OUTPUT
+
